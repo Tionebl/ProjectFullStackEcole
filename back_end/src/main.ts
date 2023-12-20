@@ -5,6 +5,11 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import charRoutes from './char';
 
+import cors from 'cors';
+
+// ...
+
+// Activez CORS
 
 const API_BASE_URL = 'mongodb+srv://blavoine:test@cluster0.54fdrky.mongodb.net/'
 dotenv.config();
@@ -12,6 +17,7 @@ dotenv.config();
 const app: Application = express();
 
 // app.use(cors());
+app.use(cors()); 
 app.use(bodyParser.json());
 
 app.use(charRoutes);
@@ -40,7 +46,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({ message: 'Erreur interne du serveur' });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
   console.log(`Serveur en cours d'exécution sur le port ${PORT}`);
