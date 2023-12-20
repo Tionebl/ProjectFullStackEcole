@@ -1,7 +1,39 @@
-@hostname = http://localhost:3000/api
-@api = {{hostname}}
-@url = 'http://localhost:3000/api/char'
+@hostname = http://localhost:3000
+@url = {{hostname}}/char
 
 ### Get
 GET {{url}}
 Content-Type: application/json
+
+### Add (POST)
+POST {{url}}
+Content-Type: application/json
+Custom-Header: MyCustomHeaderValue
+
+{
+    "realm": "Hyjal",
+    "name": "Ryuzaki",
+    "charClass": "Hunter",
+    "level": 1,
+    "region": "EU"
+}
+
+### Update (PUT)
+PUT {{url}}/65830bcc53b780d0e8ea4733
+Content-Type: application/json
+Custom-Header: MyCustomHeaderValue
+
+{
+    "realm": "UpdatedRealm",
+    "name": "UpdatedName",
+    "charClass": "UpdatedClass",
+    "level": 2,
+    "region": "US"
+}
+
+### Delete
+DELETE {{url}}/65830bcc53b780d0e8ea4733
+Content-Type: application/json
+
+
+

@@ -2,12 +2,11 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
-// import cors from 'cors';
 import dotenv from 'dotenv';
 import charRoutes from './char';
-// import authRoutes from './routes/authRoutes';
-// import crudRoutes from './routes/crudRoutes';
 
+
+const API_BASE_URL = 'mongodb+srv://blavoine:test@cluster0.54fdrky.mongodb.net/'
 dotenv.config();
 
 const app: Application = express();
@@ -18,9 +17,14 @@ app.use(bodyParser.json());
 app.use(charRoutes);
 // mongodb+srv://blavoine:test@cluster0.54fdrky.mongodb.net/
 
-mongoose.connect(process.env.MONGO_URI as string, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
+mongoose.connect(API_BASE_URL as string, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}as mongoose.ConnectOptions);
+
+
+mongoose.connection.on('open', () => {
+  console.log('Connexion à MongoDB établie avec succès');
 });
 
 mongoose.connection.on('error', (err) => {
