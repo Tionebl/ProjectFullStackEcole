@@ -25,9 +25,6 @@
   import { ref, defineProps, defineEmits } from 'vue';
   import { useApi } from '../api/api';
   
-  const props = defineProps({
-  });
-
   const emits = defineEmits(['added', "cancel"]);
   
   const api = useApi();
