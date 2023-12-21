@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import CharSelect from './views/CharSelect.vue';
+import Register from './views/RegisterCreate.vue';
 </script>
 
 <template>
@@ -8,7 +9,9 @@ import CharSelect from './views/CharSelect.vue';
       <!-- <nav>
         <RouterLink to="/">Home</RouterLink>
       </nav> -->
-        <CharSelect />
+
+      <Register />
+        <!-- <CharSelect /> -->
     </div>
 </template>
 

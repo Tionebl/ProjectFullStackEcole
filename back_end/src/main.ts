@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import charRoutes from './char';
+import AuthRoutes from './user';
 
 import cors from 'cors';
 
@@ -20,7 +21,9 @@ const app: Application = express();
 app.use(cors()); 
 app.use(bodyParser.json());
 
+app.use(AuthRoutes);
 app.use(charRoutes);
+
 // mongodb+srv://blavoine:test@cluster0.54fdrky.mongodb.net/
 
 mongoose.connect(API_BASE_URL as string, {

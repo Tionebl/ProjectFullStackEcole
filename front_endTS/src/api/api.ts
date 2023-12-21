@@ -4,6 +4,12 @@ import type { AxiosResponse } from 'axios';
 interface Char {
 }
 
+interface User {
+  name: string;
+  password: string;
+  email: string;
+  token: string;
+}
 export const useApi = () => {
   const baseUrl = 'http://localhost:8080/char';
 
@@ -69,12 +75,45 @@ export const useApi = () => {
     }
   };
 
+  const createUser = async (user: User): Promise<User> => {
+    try {
+      const response = await axios.post<User>(`http://localhost:8080/user`, user);
+      return handleResponse(response);
+    } catch (error) {
+      handleRequestError(error as Error);
+      return {} as User;
+    }
+  }
+
+  const login = async (name: string): Promise<User> => {
+    try {
+      const response = await axios.get<User>(`http://localhost:8080/login/${name}`);
+      return handleResponse(response);
+    } catch (error) {
+      handleRequestError(error as Error);
+      return {} as User;
+    }
+  }
+
+  const logout = async (userId: string): Promise<User> => {
+    try {
+      const response = await axios.post<User>(`http://localhost:8080/logout`, { userId });
+      return handleResponse(response);
+    } catch (error) {
+      handleRequestError(error as Error);
+      return {} as User;
+    }
+  }
+
   return {
     GetAll,
     Get,
     Add,
     Delete,
     Update,
+    createUser,
+    login,
+    logout
   };
 };
 
